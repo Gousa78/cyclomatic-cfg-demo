@@ -1,0 +1,31 @@
+digraph CFG {
+  11 [label="Program"];
+  12 [label="undefined"];
+  13 [label="FunctionDeclaration"];
+  14 [label="Identifier"];
+  15 [label="undefined"];
+  16 [label="Identifier"];
+  17 [label="Identifier"];
+  18 [label="BlockStatement"];
+  19 [label="IfStatement"];
+  20 [label="BlockStatement"];
+  21 [label="ReturnStatement"];
+  22 [label="Identifier"];
+  23 [label="BlockStatement"];
+  24 [label="ReturnStatement"];
+  25 [label="Identifier"];
+  11 -> 12;
+  12 -> 13;
+  13 -> 14;
+  13 -> 15;
+  15 -> 16;
+  15 -> 17;
+  13 -> 18;
+  18 -> 19;
+  19 -> 20;
+  20 -> 21;
+  21 -> 22;
+  19 -> 23;
+  23 -> 24;
+  24 -> 25;
+}
