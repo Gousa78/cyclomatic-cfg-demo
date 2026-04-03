@@ -1,0 +1,23 @@
+digraph CFG {
+  0 [label="Program"];
+  1 [label="undefined"];
+  2 [label="FunctionDeclaration"];
+  3 [label="Identifier"];
+  4 [label="undefined"];
+  5 [label="Identifier"];
+  6 [label="BlockStatement"];
+  7 [label="ReturnStatement"];
+  8 [label="BinaryExpression"];
+  9 [label="Identifier"];
+  10 [label="Literal"];
+  0 -> 1;
+  1 -> 2;
+  2 -> 3;
+  2 -> 4;
+  4 -> 5;
+  2 -> 6;
+  6 -> 7;
+  7 -> 8;
+  8 -> 9;
+  8 -> 10;
+}
