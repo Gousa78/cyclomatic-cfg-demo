@@ -4,6 +4,7 @@ const { simple, medium, complex } = require('./examples');
 const { printReport } = require('./report');
 const { visualizeFunction } = require('./visualizer');
 
+console.log("=== ANALYSE EN COURS ===");
 
 function analyzeFunction(fn, name) {
     const ast = esprima.parseScript(fn.toString());
