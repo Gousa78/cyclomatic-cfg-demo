@@ -3,11 +3,10 @@ name: CI/CD - Cyclomatic + CFG
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
- permissions:
+
+permissions:
   contents: write   # 🔥 IMPORTANT
-  
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -27,17 +26,10 @@ jobs:
       - name: Run analysis script
         run: node index.js
 
-        # ✅ AJOUT IMPORTANT
-      - name: Configure Git
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-
       - name: Deploy SVGs to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./
-          allow_empty_commit: true
           commit_message: "Update CFG SVGs"
