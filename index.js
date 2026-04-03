@@ -3,7 +3,7 @@ const { calculateCyclomaticComplexity, buildCFG, exportToDot } = require('./anal
 const { simple, medium, complex } = require('./examples');
 const { printReport } = require('./report');
 const { visualizeFunction } = require('./visualizer');
-
+// ajout d'une trace
 console.log("=== ANALYSE EN COURS ===");
 
 function analyzeFunction(fn, name) {
