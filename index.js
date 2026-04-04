@@ -2,28 +2,24 @@ const esprima = require('esprima');
 const { calculateCyclomaticComplexity, buildCFG, exportToDot } = require('./analyzer');
 const { simple, medium, complex } = require('./examples');
 const { printReport } = require('./report');
-const { visualizeFunction } = require('./visualizer');
+const { generateSVG } = require('./visualizer');
+
 // ajout d'une trace
 console.log("=== ANALYSE EN COURS ===");
-
-function analyzeFunction(fn, name) {
+async function analyzeFunction(fn, name) {
     const ast = esprima.parseScript(fn.toString());
+	// const ast = esprima.parseScript(fn.toString(), { range: true });
 	
-	// Complexité cyclomatique
     const complexity = calculateCyclomaticComplexity(ast);
     printReport(name, complexity);
-	
-	// Générer CFG visuel
+
     const { nodes, edges } = buildCFG(ast);
-    exportToDot(nodes, edges, `cfg_${name}.dot`);
-    console.log(`CFG exporté : cfg_${name}.dot`);
+
+    // 🔥 Générer SVG avec TON CFG
+	await generateSVG(nodes, edges, complexity, `cfg_${name}.svg`);
 }
+
 // Analyser toutes les fonctions
-(async () => {
-    await visualizeFunction(simple, "simple");
-    await visualizeFunction(medium, "medium");
-    await visualizeFunction(complex, "complex");
-})();
 
 analyzeFunction(simple, "simple");
 analyzeFunction(medium, "medium");
