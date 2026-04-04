@@ -1,62 +1,60 @@
-const esprima = require('esprima');
 const fs = require('fs');
 const { Module, render } = require('viz.js/full.render.js');
 const Viz = require('viz.js');
 
 const viz = new Viz({ Module, render });
 
-// Créer un noeud unique
-let nodeId = 0;
-function createNode(label) {
-    return { id: nodeId++, label };
-}
-
-// Construire CFG
-function buildCFG(node, parent = null, edges = [], nodes = []) {
-    if (!node) return { nodes, edges };
-    const current = createNode(node.type);
-    nodes.push(current);
-    if (parent) edges.push({ from: parent.id, to: current.id });
-    switch (node.type) {
-        case 'IfStatement':
-            buildCFG(node.consequent, current, edges, nodes);
-            if (node.alternate) buildCFG(node.alternate, current, edges, nodes);
-            break;
-        case 'BlockStatement':
-            node.body.forEach(stmt => buildCFG(stmt, current, edges, nodes));
-            break;
-        default:
-            for (let key in node) {
-                if (node[key] && typeof node[key] === 'object') buildCFG(node[key], current, edges, nodes);
-            }
-    }
-    return { nodes, edges };
-}
-
-// Convertir CFG en format DOT
-function cfgToDot(nodes, edges) {
+// Transformer CFG en DOT
+function cfgToDot(nodes, edges, complexity) {
     let dot = 'digraph CFG {\n';
-    nodes.forEach(n => dot += `  ${n.id} [label="${n.label}", shape=box];\n`);
-    edges.forEach(e => dot += `  ${e.from} -> ${e.to};\n`);
+
+    // Style global
+    dot += '  node [shape=box, style=filled, fontname="Arial"];\n';
+
+    // NODES
+    nodes.forEach(n => {
+		let label = n.label.toLowerCase().trim();
+		let color = "lightblue";
+
+        if (n.label === "Start") color = "green";
+        if (n.label === "End") color = "orange";
+        if (n.label === "if") color = "yellow";
+        if (n.label === "return") color = "lightgray";
+
+        dot += `  ${n.id} [label="${n.label}", fillcolor="${color}"];\n`;
+    });
+
+    // EDGES avec True / False
+    edges.forEach(e => {
+        let label = "";
+        let color = "black";
+
+        if (e.type === "true") {
+            label = "True";
+            color = "green";
+        } else if (e.type === "false") {
+            label = "False";
+            color = "red";
+        }
+
+        dot += `  ${e.from} -> ${e.to} [label="${label}", color="${color}"];\n`;
+    });
+
+    // Affichage complexité
+    dot += `  label="Complexité cyclomatique = ${complexity}";\n`;
+    dot += '  labelloc="t";\n';
+    dot += '  fontsize=20;\n';
+
     dot += '}';
     return dot;
 }
 
-// Générer PNG
-async function generatePNG(dot, filename) {
-    const svg = await viz.renderString(dot, { format: 'svg' });
+// Générer SVG
+async function generateSVG(nodes, edges, complexity, filename) {
+    const dot = cfgToDot(nodes, edges, complexity);
+    const svg = await viz.renderString(dot);
     fs.writeFileSync(filename, svg);
-    console.log(`Graphique généré : ${filename}`);
+    console.log(`✅ CFG amélioré : ${filename}`);
 }
 
-// Exemple d'utilisation
-async function visualizeFunction(fn, name) {
-    nodeId = 0;
-    const ast = esprima.parseScript(fn.toString());
-    const { nodes, edges } = buildCFG(ast);
-    const dot = cfgToDot(nodes, edges);
-    await generatePNG(dot, `cfg_${name}.svg`);
-}
-
-// Export
-module.exports = { visualizeFunction };
+module.exports = { generateSVG };
