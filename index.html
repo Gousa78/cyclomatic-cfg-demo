@@ -1,6 +1,67 @@
-<h1>CFG Demo</h1>
-<ul>
-  <li><a href="cfg_simple.svg">Simple</a></li>
-  <li><a href="cfg_medium.svg">Medium</a></li>
-  <li><a href="cfg_complex.svg">Complex</a></li>
-</ul>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Analyse CFG & Couverture</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+    }
+    .graph {
+      margin: 30px;
+    }
+    img {
+      width: 400px;
+      border: 1px solid #ccc;
+      background: white;
+    }
+    .coverage {
+      font-size: 24px;
+      margin: 20px;
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Analyse Cyclomatique & CFG</h1>
+
+<div class="coverage">
+  Couverture : <span id="coverage">Chargement...</span>%
+</div>
+
+<div class="graph">
+  <h2>Simple</h2>
+  <img src="cfg_simple.svg">
+</div>
+
+<div class="graph">
+  <h2>Medium</h2>
+  <img src="cfg_medium.svg">
+</div>
+
+<div class="graph">
+  <h2>Complex</h2>
+  <img src="cfg_complex.svg">
+</div>
+
+<script>
+fetch('coverage/coverage-summary.json')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('coverage').textContent =
+      data.total.lines.pct;
+  })
+  .catch(() => {
+    document.getElementById('coverage').textContent = "N/A";
+  });
+</script>
+
+</body>
+</html>
