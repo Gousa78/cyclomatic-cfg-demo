@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1775395014497" clover="3.2.0">
-  <project timestamp="1775395014497" name="All files">
+<coverage generated="1775395963086" clover="3.2.0">
+  <project timestamp="1775395963086" name="All files">
     <metrics statements="12" coveredstatements="8" conditionals="10" coveredconditionals="8" methods="3" coveredmethods="1" elements="25" coveredelements="17" complexity="0" loc="12" ncloc="12" packages="1" files="1" classes="1"/>
     <file name="examples.js" path="D:\01 - Demo\00 - Test Unitaire\NombreCyclomatique\Exemple1\examples.js">
       <metrics statements="12" coveredstatements="8" conditionals="10" coveredconditionals="8" methods="3" coveredmethods="1"/>

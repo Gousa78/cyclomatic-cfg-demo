@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "test": "jest",
-  "test:coverage": "jest --coverage --colors"
+    "test": "jest",
+    "test:coverage": "jest --coverage --colors"
+  },
+  "jest": {
+    "coverageReporters": ["json-summary", "text", "lcov"]
   },
   "keywords": [],
   "author": "",
