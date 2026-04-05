@@ -134,16 +134,13 @@ if (x > y) {
   `https://gousa78.github.io/cyclomatic-cfg-demo/`
 
 - 🌐 `index.html` :  
-  - [ ] Liens vers les CFG  
-  - [ ] Voir les SVG  
-
 
 > Les diagrammes sont publiés automatiquement et accessibles publiquement.
 
-
-- 🌐 Badge de couverture GitHub
+> Taux de couverture mis à jour dynamiquement
 
 ![Coverage](https://img.shields.io/endpoint?url=https://gousa78.github.io/cyclomatic-cfg-demo/coverage.json)
+
 ---
 
 ## 8️⃣ Conclusion
