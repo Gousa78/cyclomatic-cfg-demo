@@ -26,10 +26,28 @@ jobs:
       - name: Run analysis script
         run: node index.js
 
+      - name: Run tests with coverage
+        run: npm run test:coverage
+        
+      - name: Show coverage summary
+        run: |
+        cat coverage/lcov-report/index.html || true
+
+      - name: Extract coverage %
+        id: coverage
+        run: |
+        COVERAGE=$(node -e "
+          const fs=require('fs');
+          const data=fs.readFileSync('./coverage/coverage-summary.json');
+          const json=JSON.parse(data);
+          console.log(json.total.lines.pct);
+        ")
+        echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
+
       - name: Deploy SVGs to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./
+          publish_dir: ./coverage/lcov-report
           commit_message: "Update CFG SVGs"

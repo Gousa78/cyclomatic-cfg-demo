@@ -7,13 +7,14 @@ const { generateSVG } = require('./visualizer');
 // ajout d'une trace
 console.log("=== ANALYSE EN COURS ===");
 async function analyzeFunction(fn, name) {
-    const ast = esprima.parseScript(fn.toString());
-	// const ast = esprima.parseScript(fn.toString(), { range: true });
+    // const ast = esprima.parseScript(fn.toString());
+	const sourceCode = fn.toString();
+	const ast = esprima.parseScript(sourceCode, { range: true });
 	
     const complexity = calculateCyclomaticComplexity(ast);
     printReport(name, complexity);
 
-    const { nodes, edges } = buildCFG(ast);
+    const { nodes, edges } = buildCFG(ast, sourceCode);
 
     // 🔥 Générer SVG avec TON CFG
 	await generateSVG(nodes, edges, complexity, `cfg_${name}.svg`);

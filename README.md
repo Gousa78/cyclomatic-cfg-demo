@@ -140,6 +140,10 @@ if (x > y) {
 
 > Les diagrammes sont publiés automatiquement et accessibles publiquement.
 
+
+- 🌐 Badge de couverture GitHub
+
+![Coverage](https://img.shields.io/badge/coverage-${{ steps.coverage.outputs.coverage }}%25-green)
 ---
 
 ## 8️⃣ Conclusion

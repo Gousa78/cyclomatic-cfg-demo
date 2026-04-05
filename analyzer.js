@@ -46,7 +46,7 @@ function calculateCyclomaticComplexity(ast) {
 
 
 // affichage graphe
-function buildCFG(ast) {
+function buildCFG(ast, sourceCode) {
     let nodes = [];
     let edges = [];
     let id = 0;
@@ -106,32 +106,43 @@ function buildCFG(ast) {
                 // boucle
                 edges.push({ from: current.id, to: loop.id });
                 break;
+				
+			case "ReturnStatement":
+				let returnLabel = "return";
 
-            case "ReturnStatement":
-                const ret = newNode("return");
-                edges.push({ from: current.id, to: ret.id });
-                current = ret;
-                break;
-			
-		/*	case "ReturnStatement":
-				const retCode = "return " + (node.argument ? sourceCode.substring(node.argument.range[0], node.argument.range[1]) : "");
-				const ret = newNode(retCode);
-				edges.push({ from: current.id, to: ret.id });
-				current = ret;
+				if (node.argument) {
+					const arg = sourceCode.substring(
+						node.argument.range[0],
+						node.argument.range[1]
+					);
+					returnLabel = `return ${arg}`;
+				}
+
+				const retNode = newNode(returnLabel);
+				edges.push({ from: current.id, to: retNode.id });
+				current = retNode;
 				break;
-			
+
 			case "ExpressionStatement":
-				const code = sourceCode.substring(node.range[0], node.range[1]);
-				const expr = newNode(code);
-				edges.push({ from: current.id, to: expr.id });
-				current = expr;
-				break;
-*/
-            case "ExpressionStatement":
-                const expr = newNode("expr");
-                edges.push({ from: current.id, to: expr.id });
-                current = expr;
-                break;
+				let label = "expr";
+
+				if (node.expression && node.expression.type === "CallExpression") {
+					const callee = sourceCode.substring(
+					node.expression.callee.range[0],
+					node.expression.callee.range[1]
+				);
+
+				const args = node.expression.arguments.map(arg =>
+				sourceCode.substring(arg.range[0], arg.range[1])
+				).join(", ");
+
+				label = `${callee}(${args})`;
+			}
+
+    const exprNode = newNode(label);
+    edges.push({ from: current.id, to: exprNode.id });
+    current = exprNode;
+    break;
 
             case "BlockStatement":
                 node.body.forEach(traverse);
