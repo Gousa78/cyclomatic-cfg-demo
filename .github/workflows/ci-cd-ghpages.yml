@@ -50,6 +50,7 @@ jobs:
               -Dsonar.projectKey=Gousa78_cyclomatic-cfg-demo
               -Dsonar.organization=gousa78
               -Dsonar.sources=.
+              -Dsonar.branch=main
               -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
