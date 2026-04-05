@@ -38,7 +38,7 @@ jobs:
 
       - name: Update coverage badge in README
         run: 
-          COVERAGE=${{ steps.coverage.outputs.coverage }}; && sed -i "s|\!\[Coverage\](https://img.shields.io/badge/coverage-.*%-green)|![Coverage](https://img.shields.io/badge/coverage-${COVERAGE}%25-green)|" README.md
+          COVERAGE=${{ steps.coverage.outputs.coverage }}; sed -i "s|\!\[Coverage\](https://img.shields.io/badge/coverage-.*%-green)|![Coverage](https://img.shields.io/badge/coverage-${COVERAGE}%25-green)|" README.md
 
       - name: Deploy SVGs to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
