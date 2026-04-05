@@ -5,7 +5,7 @@ const { printReport } = require('./report');
 const { generateSVG } = require('./visualizer');
 
 // ajout d'une trace
-console.log("=== ANALYSE EN COURS ===");
+console.log("=== ANALYSE EST EN COURS ===");
 async function analyzeFunction(fn, name) {
     // const ast = esprima.parseScript(fn.toString());
 	const sourceCode = fn.toString();
