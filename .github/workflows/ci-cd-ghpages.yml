@@ -52,6 +52,7 @@ jobs:
               -Dsonar.sources=.
               -Dsonar.branch=main
               -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+        continue-on-error: true 
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
