@@ -43,6 +43,17 @@ jobs:
         run: 
           COVERAGE=${{ steps.coverage.outputs.coverage }}; sed -i "s|\!\[Coverage\](https://img.shields.io/badge/coverage-.*%-green)|![Coverage](https://img.shields.io/badge/coverage-${COVERAGE}%25-green)|" README.md
 
+      - name: SonarQube Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          args: >
+              -Dsonar.projectKey=TON_PROJET
+              -Dsonar.organization=TON_ORG
+              -Dsonar.sources=.
+              -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
       - name: Deploy SVGs to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
