@@ -1,0 +1,1 @@
+sonar-scanner.bat -D"sonar.projectKey=Gousa78_cyclomatic-cfg-demo" -D"sonar.sources=." -D"sonar.host.url=https://sonarcloud.io/project/information?id=Gousa78_cyclomatic-cfg-demo" -D"sonar.token=sqp_72c2ef8c1dae0e070a1603843e1dd29ed90e5df2"
