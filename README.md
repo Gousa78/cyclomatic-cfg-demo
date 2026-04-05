@@ -143,7 +143,7 @@ if (x > y) {
 
 - 🌐 Badge de couverture GitHub
 
-![Coverage](https://img.shields.io/badge/coverage-${{ steps.coverage.outputs.coverage }}%25-green)
+![Coverage](https://img.shields.io/endpoint?url=https://gousa78.github.io/cyclomatic-cfg-demo/coverage.json)
 ---
 
 ## 8️⃣ Conclusion
