@@ -44,7 +44,7 @@ jobs:
           COVERAGE=${{ steps.coverage.outputs.coverage }}; sed -i "s|\!\[Coverage\](https://img.shields.io/badge/coverage-.*%-green)|![Coverage](https://img.shields.io/badge/coverage-${COVERAGE}%25-green)|" README.md
 
       - name: SonarQube Scan
-        uses: SonarSource/sonarcloud-github-action@4abf09a7acd8b899bb46a12ec618458a3db2b51f
+        uses: SonarSource/sonarcloud-github-action@d40628172ca27180a331f8b04279befc2706144a
         with:
           args: >
               -Dsonar.projectKey=Gousa78_cyclomatic-cfg-demo
@@ -54,7 +54,7 @@ jobs:
               -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
               
       - name: Wait for SonarCloud Quality Gate
-            uses: SonarSource/sonarcloud-github-action@4abf09a7acd8b899bb46a12ec618458a3db2b51f
+            uses: SonarSource/sonarcloud-github-action@d40628172ca27180a331f8b04279befc2706144a
         with:
             args: >
               -Dsonar.projectKey=Gousa78_cyclomatic-cfg-demo
