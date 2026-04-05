@@ -1,53 +1,88 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Analyse CFG & Couverture</title>
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      background: #f5f5f5;
-    }
-    h1 {
-      color: #333;
-    }
-    .graph {
-      margin: 30px;
-    }
-    img {
-      width: 400px;
-      border: 1px solid #ccc;
-      background: white;
-    }
-    .coverage {
-      font-size: 24px;
-      margin: 20px;
-      color: green;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Dashboard Qualité Logicielle</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #f4f6f8;
+  text-align: center;
+}
+
+h1 {
+  margin: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 10px;
+  width: 250px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.value {
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.green { color: green; }
+.orange { color: orange; }
+.red { color: red; }
+
+.graph img {
+  width: 300px;
+  margin: 10px;
+}
+</style>
 </head>
 
 <body>
 
-<h1>Analyse Cyclomatique & CFG</h1>
+<h1>📊 Dashboard Qualité Logicielle</h1>
 
-<div class="coverage">
-  Couverture : <span id="coverage">Chargement...</span>%
+<div class="container">
+
+  <div class="card">
+    <h3>Couverture</h3>
+    <div id="coverage" class="value">...</div>
+  </div>
+
+  <div class="card">
+    <h3>Complexité</h3>
+    <div class="value">Simple: 1<br>Medium: 2<br>Complex: 6</div>
+  </div>
+
+  <div class="card">
+    <h3>Status CI/CD</h3>
+    <div class="value green">✔ OK</div>
+  </div>
+
 </div>
 
+<h2>CFG</h2>
+
 <div class="graph">
-  <h2>Simple</h2>
+  <h3>Simple</h3>
   <img src="cfg_simple.svg">
 </div>
 
 <div class="graph">
-  <h2>Medium</h2>
+  <h3>Medium</h3>
   <img src="cfg_medium.svg">
 </div>
 
 <div class="graph">
-  <h2>Complex</h2>
+  <h3>Complex</h3>
   <img src="cfg_complex.svg">
 </div>
 
@@ -55,11 +90,13 @@
 fetch('coverage/coverage-summary.json')
   .then(res => res.json())
   .then(data => {
-    document.getElementById('coverage').textContent =
-      data.total.lines.pct;
-  })
-  .catch(() => {
-    document.getElementById('coverage').textContent = "N/A";
+    const pct = data.total.lines.pct;
+    const el = document.getElementById('coverage');
+    el.textContent = pct + "%";
+
+    if (pct >= 80) el.className = "value green";
+    else if (pct >= 50) el.className = "value orange";
+    else el.className = "value red";
   });
 </script>
 

@@ -48,4 +48,9 @@ describe('Tests de la fonction complex', () => {
         expect(console.log).not.toHaveBeenCalledWith(1);
     });
 
+	// ✅ test 7 retour fonction
+    test('retourne toujours b', () => {
+        expect(complex(10, 20, 30)).toBe(20);
+        expect(complex(5, 1, 0)).toBe(1);
+    });
 });
