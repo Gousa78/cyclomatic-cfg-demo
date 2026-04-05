@@ -44,7 +44,7 @@ jobs:
           COVERAGE=${{ steps.coverage.outputs.coverage }}; sed -i "s|\!\[Coverage\](https://img.shields.io/badge/coverage-.*%-green)|![Coverage](https://img.shields.io/badge/coverage-${COVERAGE}%25-green)|" README.md
 
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v7
+        uses: SonarSource/sonarqube-scan-action@299e4b793aaa83bf2aba7c9c14bedbb485688ec4
         with:
           args: >
               -Dsonar.projectKey=Gousa78_cyclomatic-cfg-demo
