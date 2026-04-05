@@ -52,14 +52,6 @@ jobs:
               -Dsonar.sources=.
               -Dsonar.branch=main
               -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-              
-      - name: Wait for SonarCloud Quality Gate
-            uses: SonarSource/sonarcloud-github-action@d40628172ca27180a331f8b04279befc2706144a
-        with:
-            args: >
-              -Dsonar.projectKey=Gousa78_cyclomatic-cfg-demo
-              -Dsonar.organization=gousa78
-              -Dsonar.branch=main 
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
