@@ -34,14 +34,7 @@ jobs:
 
       - name: Extract coverage %
         id: coverage
-        run: |
-        COVERAGE=$(node -e "
-          const fs=require('fs');
-          const data=fs.readFileSync('./coverage/coverage-summary.json');
-          const json=JSON.parse(data);
-          console.log(json.total.lines.pct);
-        ")
-        echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
+        run: COVERAGE=$(node -e "; const fs=require('fs'); const data=fs.readFileSync('./coverage/coverage-summary.json'); const json=JSON.parse(data); console.log(json.total.lines.pct); ") &&         echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
 
       - name: Deploy SVGs to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
