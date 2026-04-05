@@ -37,7 +37,7 @@ jobs:
         run: COVERAGE=$(node -e "; const fs=require('fs'); const data=fs.readFileSync('./coverage/coverage-summary.json'); const json=JSON.parse(data); console.log(json.total.lines.pct); ") &&         echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
 
       - name: Save coverage JSON
-        run: node -e "const fs=require('fs'); const json=JSON.parse(fs.readFileSync('./coverage/coverage-summary.json')); fs.writeFileSync('./coverage.json', JSON.stringify({coverage: json.total.lines.pct}))"
+        run: node -e "const fs=require('fs'); const json=JSON.parse(fs.readFileSync('./coverage/coverage-summary.json')); const pct=json.total.lines.pct; let color='red'; if(pct>=80) color='green'; else if(pct>=50) color='orange'; fs.writeFileSync('./coverage.json', JSON.stringify({schemaVersion:1,label:'coverage',message:pct+'%',color:color}));"
 
       - name: Update coverage badge in README
         run: 
