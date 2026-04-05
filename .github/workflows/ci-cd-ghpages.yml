@@ -30,8 +30,7 @@ jobs:
         run: npm run test:coverage
         
       - name: Show coverage summary
-        run: |
-        cat coverage/lcov-report/index.html || true
+        run: cat coverage/lcov-report/index.html || true
 
       - name: Extract coverage %
         id: coverage
