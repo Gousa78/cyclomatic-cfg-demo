@@ -55,6 +55,7 @@ jobs:
               -X
               -Dsonar.projectKey=Gousa78_cyclomatic-cfg-demo
               -Dsonar.organization=gousa78
+              -Dsonar.host.url=https://sonarcloud.io
               -Dsonar.sources=.
               -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
         env:
