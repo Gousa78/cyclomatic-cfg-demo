@@ -1,1 +1,0 @@
- 2cssXhr!coverage/lcov-report/prettify.css

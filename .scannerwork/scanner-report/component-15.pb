@@ -1,1 +1,0 @@
- 2jsXhr coverage/lcov-report/prettify.js

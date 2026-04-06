@@ -47,7 +47,7 @@ Project server settings:
   - sonar.xml.file.suffixes=.xml,.xsd,.xsl,.config
   - sonar.yaml.file.suffixes=.yaml,.yml
 Project scanner properties:
-  - sonar.exclusions=**/node_modules/**,**/*.test.js/,**/output/code-coverage/**,**/*.xml
+  - sonar.exclusions=**/node_modules/**,**/*.test.js,**/coverage/**
   - sonar.host.url=https://sonarcloud.io
   - sonar.javascript.lcov.reportPaths=coverage/lcov.info
   - sonar.organization=gousa78

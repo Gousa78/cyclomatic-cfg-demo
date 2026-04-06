@@ -1,1 +1,1 @@
- 2webXthrcoverage/lcov-report/index.html
+ 2jsX<hrvisualizer.js

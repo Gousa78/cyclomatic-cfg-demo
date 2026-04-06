@@ -1,1 +1,0 @@
- (2jsXhr__tests__/simple.test.js
