@@ -47,7 +47,7 @@ jobs:
         run: ls -l coverage/
           
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v7
+        uses: SonarSource/sonarqube-scan-action@v2
         with:
           args: >
               -Dsonar.projectKey=Gousa78_cyclomatic-cfg-demo
