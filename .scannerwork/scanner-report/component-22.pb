@@ -1,0 +1,1 @@
+ 2jsonXhrcoverage/coverage-final.json
