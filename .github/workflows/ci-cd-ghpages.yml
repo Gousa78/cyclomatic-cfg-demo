@@ -34,7 +34,7 @@ jobs:
 
       - name: Extract coverage %
         id: coverage
-        run: COVERAGE=$(node -e "; const fs=require('fs'); const data=fs.readFileSync('./coverage/coverage-summary.json'); const json=JSON.parse(data); console.log(json.total.lines.pct); ") &&         echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
+        run: COVERAGE=$(node -e "const fs=require('fs'); const data=fs.readFileSync('./coverage/coverage-summary.json'); const json=JSON.parse(data); console.log(json.total.lines.pct); ") &&         echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
 
       - name: Save coverage JSON
         run: node -e "const fs=require('fs'); const json=JSON.parse(fs.readFileSync('./coverage/coverage-summary.json')); const pct=json.total.lines.pct; let color='red'; if(pct>=80) color='green'; else if(pct>=50) color='orange'; fs.writeFileSync('./coverage.json', JSON.stringify({schemaVersion:1,label:'coverage',message:pct+'%',color:color}));"
@@ -44,16 +44,15 @@ jobs:
           COVERAGE=${{ steps.coverage.outputs.coverage }}; sed -i "s|\!\[Coverage\](https://img.shields.io/badge/coverage-.*%-green)|![Coverage](https://img.shields.io/badge/coverage-${COVERAGE}%25-green)|" README.md
       
       - name: Check coverage file
-        run: ls -l coverage/
+        run: cat coverage/lcov.info | head -n 20
           
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v2
+        uses: SonarSource/sonarcloud-github-action@v2
         with:
           args: >
               -Dsonar.projectKey=Gousa78_cyclomatic-cfg-demo
               -Dsonar.organization=gousa78
               -Dsonar.sources=.
-              -Dsonar.branch=main
               -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
               -Dsonar.qualitygate.wait=true  
         env:
