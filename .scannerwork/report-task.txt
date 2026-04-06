@@ -3,5 +3,5 @@ projectKey=Gousa78_cyclomatic-cfg-demo
 serverUrl=https://sonarcloud.io
 serverVersion=8.0.0.84764
 dashboardUrl=https://sonarcloud.io/dashboard?id=Gousa78_cyclomatic-cfg-demo&branch=main
-ceTaskId=AZ1jjfWae6OZJxlmiG7A
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZ1jjfWae6OZJxlmiG7A
+ceTaskId=AZ1jlDHKjlGuIMy2eIh6
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZ1jlDHKjlGuIMy2eIh6

@@ -21,13 +21,10 @@ test:
 coverage:
 	$(NPM) run test:coverage
 	
-# 💾 Git commit interactif
-
+# 💾 Git commit interactif (Windows cmd.exe)
 git:
-	@echo Staging all changes...
-	git add .
-	@cmd /C "set /p msg=Enter commit message: && if not defined msg (echo Commit aborted: no message provided.) else (git commit -m "%msg%" && git push origin main && echo Changes pushed.)"
-	
+	@echo Running interactive Git commit...
+	@git-commit.bat
 
 # 🔍 Analyse Sonar locale (optionnel si sonar-scanner installé)
 sonar:
