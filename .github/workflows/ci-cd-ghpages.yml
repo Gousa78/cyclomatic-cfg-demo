@@ -47,7 +47,7 @@ jobs:
         run: cat coverage/lcov.info | head -n 20
           
       - name: SonarQube Scan
-        uses: SonarSource/sonarcloud-github-action@v2
+        uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
         with:
           args: >
               -Dsonar.projectKey=Gousa78_cyclomatic-cfg-demo
