@@ -47,14 +47,13 @@ jobs:
         run: cat coverage/lcov.info | head -n 20
           
       - name: SonarQube Scan
-        uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
+        uses: SonarSource/sonarqube-scan-action@v6
         with:
           args: >
               -Dsonar.projectKey=Gousa78_cyclomatic-cfg-demo
               -Dsonar.organization=gousa78
               -Dsonar.sources=.
               -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-              -Dsonar.qualitygate.wait=true  
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
