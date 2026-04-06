@@ -1,1 +1,1 @@
- (2jsXhr__tests__/medium.test.js
+ (2jsXhr__tests__/analyzer.test.js

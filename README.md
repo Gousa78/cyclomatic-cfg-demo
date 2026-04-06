@@ -141,6 +141,14 @@ if (x > y) {
 
 ![Coverage](https://img.shields.io/endpoint?url=https://gousa78.github.io/cyclomatic-cfg-demo/coverage.json)
 
+Approche
+À chaque push ou pull request sur ton repo :
+
+- Installer `Node.js`
+- Installer les dépendances `npm install`
+- Lancer le script d’analyse `node index.js`
+- Vérifier que les SVG et rapports sont générés
+
 ---
 
 ## 8️⃣ Conclusion
