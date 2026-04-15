@@ -33,6 +33,7 @@
 
 > La démo porte sur un outil d’analyse automatique de code JavaScript qui calcule la complexité cyclomatique ainsi qu’un nombre minimum de tests et génère des graphes de flux de contrôle (CFG) publiés sur GitHub Pages.
 
+ ![Environnement de la démo](./Schéma.png)
 ---
 
 ## 2️⃣ Struture du projet
@@ -101,10 +102,10 @@ if (x > y) {
 - ⚙️ Vérifier les résultats :  
 
 | Fonction | Complexité cyclomatique |
-|----------|-----------------------|
-| simple   |          1            |
-| medium   |          2           |
-| complex  |          5          |
+|----------|-------------------------|
+| simple   |			1			 |
+| medium   |          2              |
+| complex  |          5              |
 
 
 > “Le pipeline calcule automatiquement la complexité cyclomatique, indiquant le nombre minimal de tests pour chaque fonction.”
@@ -130,6 +131,8 @@ if (x > y) {
 
 ## 7️⃣ Déploiement GitHub Pages
 
+- 🌐 Repo projet: https://github.com/Gousa78/cyclomatic-cfg-demo
+
 - 🌐 Ouvrir l’URL racine GitHub Pages :  
   `https://gousa78.github.io/cyclomatic-cfg-demo/`
 
@@ -151,7 +154,10 @@ Approche
 
 ---
 
-## 8️⃣ Conclusion
+## 8️⃣ Lancement analyse du code
+- 🌐 Lancement Quality Gate :  https://sonarcloud.io/project/overview?id=Gousa78_cyclomatic-cfg-demo
+
+## 9️⃣ Conclusion
 
 
 Cet outil permet de visualiser les chemins d’exécution, de calculer la complexité cyclomatique et d’automatiser le déploiement avec CI/CD.  

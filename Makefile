@@ -1,6 +1,9 @@
-# Variables
+# ================================
+# ⚙️ COMMANDS
+# ================================
 NODE=node
 NPM=npm
+
 
 # Cible par défaut
 all: install analyze test
@@ -11,14 +14,15 @@ install:
 
 # 🧠 Analyse locale (CFG + complexité)
 analyze:
-	$(NODE) index.js
+	$(NODE) index.js 
+	
 
 # 🧪 Tests unitaires
 test:
 	$(NPM) test
 
-# 🧪 Tests avec couverture
-coverage:
+# 🧪 Tests avec couverture :  make -B coverage
+coverage :
 	$(NPM) run test:coverage
 	
 # 💾 Git commit interactif (Windows cmd.exe)
