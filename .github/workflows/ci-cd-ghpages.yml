@@ -22,6 +22,15 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          
+      - name: Check Java version
+        run: java -version
+
       - name: Install dependencies
         run: npm install
 
@@ -44,9 +53,12 @@ jobs:
       - name: Update coverage badge in README
         run: 
           COVERAGE=${{ steps.coverage.outputs.coverage }}; sed -i "s|\!\[Coverage\](https://img.shields.io/badge/coverage-.*%-green)|![Coverage](https://img.shields.io/badge/coverage-${COVERAGE}%25-green)|" README.md
+
+      - name: Check Java version
+        run: java -version
                 
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v2
+        uses: SonarSource/sonarqube-scan-action@v8
         with:
           args: >
               -Dsonar.projectKey=Gousa78_cyclomatic-cfg-demo
