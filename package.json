@@ -8,7 +8,11 @@
     "test:coverage": "jest --coverage --colors"
   },
   "jest": {
-    "coverageReporters": ["lcov", "text", "json-summary"]
+    "coverageReporters": [
+      "lcov",
+      "text",
+      "json-summary"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -21,6 +25,11 @@
     "viz.js": "^2.1.2"
   },
   "devDependencies": {
-    "jest": "^30.3.0"
+    "jest": "^30.5.2"
+  },
+  "allowScripts": {
+    "canvas@3.2.3": true,
+    "@parcel/watcher@2.6.0": true,
+    "unrs-resolver@1.12.2": true
   }
 }
