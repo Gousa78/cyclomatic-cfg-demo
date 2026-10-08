@@ -12,6 +12,7 @@ function calculateCyclomaticComplexity(ast) {
         switch (node.type) {
             case 'IfStatement':
                 complexity++;
+				traverse(node.test); // Ajout 08102026 suite UT coverage
                 traverse(node.consequent);
                 traverse(node.alternate);
                 break;

@@ -1,0 +1,257 @@
+const esprima = require('esprima');
+const fs = require('fs');
+
+const {
+    calculateCyclomaticComplexity,
+    buildCFG,
+    exportToDot
+} = require('../analyzer');
+
+describe('analyzer.js', () => {
+
+    describe('calculateCyclomaticComplexity()', () => {
+
+        test('fonction simple : complexité = 1', () => {
+            const source = `
+                function simple(a) {
+                    return a * 2;
+                }
+            `;
+
+            const ast = esprima.parseScript(source);
+
+            expect(calculateCyclomaticComplexity(ast)).toBe(1);
+        });
+
+        test('fonction avec if : complexité = 2', () => {
+            const source = `
+                function test(x) {
+                    if (x > 0) {
+                        return 1;
+                    }
+                    return 0;
+                }
+            `;
+
+            const ast = esprima.parseScript(source);
+
+            expect(calculateCyclomaticComplexity(ast)).toBe(2);
+        });
+
+        test('fonction avec if / else if : complexité = 3', () => {
+            const source = `
+                function test(x) {
+                    if (x > 10) {
+                        return 1;
+                    } else if (x > 5) {
+                        return 2;
+                    } else {
+                        return 3;
+                    }
+                }
+            `;
+
+            const ast = esprima.parseScript(source);
+
+            expect(calculateCyclomaticComplexity(ast)).toBe(3);
+        });
+
+        test('fonction avec boucle for : complexité = 2', () => {
+            const source = `
+                function test() {
+                    for (let i = 0; i < 3; i++) {
+                        console.log(i);
+                    }
+                }
+            `;
+
+            const ast = esprima.parseScript(source);
+
+            expect(calculateCyclomaticComplexity(ast)).toBe(2);
+        });
+
+        test('fonction avec && et ||', () => {
+            const source = `
+                function test(a, b, c) {
+                    if (a && b || c) {
+                        return true;
+                    }
+                    return false;
+                }
+            `;
+
+            const ast = esprima.parseScript(source);
+
+            expect(calculateCyclomaticComplexity(ast)).toBe(4);
+        });
+    });
+
+
+    describe('buildCFG()', () => {
+
+        test('génère un CFG avec Start et End', () => {
+            const source = `
+                function test(x) {
+                    return x;
+                }
+            `;
+
+            const ast = esprima.parseScript(source, {
+                range: true
+            });
+
+            const result = buildCFG(ast, source);
+
+            expect(result.nodes.length).toBeGreaterThan(0);
+            expect(result.edges.length).toBeGreaterThan(0);
+
+            expect(result.nodes[0].label).toBe('Start');
+            expect(result.nodes[result.nodes.length - 1].label).toBe('End');
+        });
+
+
+        test('génère les branches true et false d’un if', () => {
+            const source = `
+                function test(x) {
+                    if (x > 0) {
+                        console.log(x);
+                    } else {
+                        console.log(0);
+                    }
+                }
+            `;
+
+            const ast = esprima.parseScript(source, {
+                range: true
+            });
+
+            const result = buildCFG(ast, source);
+
+            const trueEdge = result.edges.find(
+                edge => edge.type === 'true'
+            );
+
+            const falseEdge = result.edges.find(
+                edge => edge.type === 'false'
+            );
+
+            expect(trueEdge).toBeDefined();
+            expect(falseEdge).toBeDefined();
+        });
+
+
+        test('génère un noeud de boucle for', () => {
+            const source = `
+                function test() {
+                    for (let i = 0; i < 3; i++) {
+                        console.log(i);
+                    }
+                }
+            `;
+
+            const ast = esprima.parseScript(source, {
+                range: true
+            });
+
+            const result = buildCFG(ast, source);
+
+            expect(
+                result.nodes.some(node => node.label === 'for')
+            ).toBe(true);
+
+            expect(
+                result.edges.some(
+                    edge => edge.from === edge.to
+                )
+            ).toBe(false);
+
+            const loopNode = result.nodes.find(
+                node => node.label === 'for'
+            );
+
+            expect(
+                result.edges.some(
+                    edge => edge.to === loopNode.id
+                )
+            ).toBe(true);
+        });
+
+
+        test('génère le label du return avec le code source', () => {
+            const source = `
+                function test(x) {
+                    return x;
+                }
+            `;
+
+            const ast = esprima.parseScript(source, {
+                range: true
+            });
+
+            const result = buildCFG(ast, source);
+
+            expect(
+                result.nodes.some(
+                    node => node.label === 'return x'
+                )
+            ).toBe(true);
+        });
+
+
+        test('génère le label console.log avec son argument', () => {
+            const source = `
+                function test(x) {
+                    console.log(x);
+                }
+            `;
+
+            const ast = esprima.parseScript(source, {
+                range: true
+            });
+
+            const result = buildCFG(ast, source);
+
+            expect(
+                result.nodes.some(
+                    node => node.label === 'console.log(x)'
+                )
+            ).toBe(true);
+        });
+    });
+
+
+    describe('exportToDot()', () => {
+
+        const filename = '__tests__/test-output.dot';
+
+        afterEach(() => {
+            if (fs.existsSync(filename)) {
+                fs.unlinkSync(filename);
+            }
+        });
+
+        test('génère un fichier Graphviz DOT', () => {
+
+            const nodes = [
+                { id: 0, label: 'Start' },
+                { id: 1, label: 'End' }
+            ];
+
+            const edges = [
+                { from: 0, to: 1 }
+            ];
+
+            exportToDot(nodes, edges, filename);
+
+            expect(fs.existsSync(filename)).toBe(true);
+
+            const content = fs.readFileSync(filename, 'utf8');
+
+            expect(content).toContain('digraph CFG');
+            expect(content).toContain('Start');
+            expect(content).toContain('End');
+            expect(content).toContain('0 -> 1');
+        });
+    });
+
+});
