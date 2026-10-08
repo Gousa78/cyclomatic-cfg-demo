@@ -54,10 +54,8 @@ jobs:
         run: 
           COVERAGE=${{ steps.coverage.outputs.coverage }}; sed -i "s|\!\[Coverage\](https://img.shields.io/badge/coverage-.*%-green)|![Coverage](https://img.shields.io/badge/coverage-${COVERAGE}%25-green)|" README.md
 
-      - name: Check SonarScanner
-        run: |
-          java -version
-          sonar-scanner --version
+      - name: Check Java version
+        run: java -version
                 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v2
