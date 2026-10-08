@@ -58,7 +58,7 @@ jobs:
         run: java -version
                 
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v2
+        uses: SonarSource/sonarqube-scan-action@v8
         with:
           args: >
               -Dsonar.projectKey=Gousa78_cyclomatic-cfg-demo
