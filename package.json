@@ -15,6 +15,12 @@
 		"**/*.test.js",
 		"**/*.spec.js"
 	],
+	"collectCoverageFrom": [
+    "./**/*.js",
+    "!*./**/*.test.js",
+    "!*./**/*.spec.js",
+	"!AI/**"
+	],
 	"coverageReporters": [
 		"lcov",
 		"text",
