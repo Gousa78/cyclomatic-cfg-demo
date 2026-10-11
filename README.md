@@ -154,7 +154,7 @@ Approche
 
 ## 8️⃣ Lancement analyse du code
 - 🌐 Lancement Quality Gate :  https://sonarcloud.io/project/overview?id=Gousa78_cyclomatic-cfg-demo
-- ![Quality gate][![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=Gousa78_cyclomatic-cfg-demo&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Gousa78_cyclomatic-cfg-demo)
+- [![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=Gousa78_cyclomatic-cfg-demo&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Gousa78_cyclomatic-cfg-demo)
 
 ## 9️⃣ Conclusion
 
