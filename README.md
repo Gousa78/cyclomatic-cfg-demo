@@ -157,6 +157,7 @@ Approche
 - [![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=Gousa78_cyclomatic-cfg-demo&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Gousa78_cyclomatic-cfg-demo)
 - [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Gousa78_cyclomatic-cfg-demo&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Gousa78_cyclomatic-cfg-demo)
 - [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Gousa78_cyclomatic-cfg-demo&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=Gousa78_cyclomatic-cfg-demo)
+- [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Gousa78_cyclomatic-cfg-demo&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Gousa78_cyclomatic-cfg-demo)
 
 ## 9️⃣ Conclusion
 
