@@ -142,7 +142,7 @@ if (x > y) {
 
 > Taux de couverture mis à jour dynamiquement
 
-![Coverage](https://img.shields.io/endpoint?url=https://gousa78.github.io/cyclomatic-cfg-demo/coverage.json)
+![Quality gate]([![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=Gousa78_cyclomatic-cfg-demo&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Gousa78_cyclomatic-cfg-demo))
 
 Approche
 À chaque push ou pull request sur ton repo :
