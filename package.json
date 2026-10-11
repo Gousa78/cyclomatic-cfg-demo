@@ -8,11 +8,18 @@
     "test:coverage": "jest --coverage --colors"
   },
   "jest": {
-    "coverageReporters": [
-      "lcov",
-      "text",
-      "json-summary"
-    ]
+	"roots": [
+		"<rootDir>/__tests__"
+	],
+	"testMatch": [
+		"**/*.test.js",
+		"**/*.spec.js"
+	],
+	"coverageReporters": [
+		"lcov",
+		"text",
+		"json-summary"
+	]
   },
   "keywords": [],
   "author": "",

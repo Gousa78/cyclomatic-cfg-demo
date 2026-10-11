@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Analyse statique JavaScript et revue pédagogique assistée par IA.">
+  <title>AI Code Quality Assistant</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">AQ</div>
+    <div><p class="eyebrow">LABORATOIRE DE QUALITÉ LOGICIELLE</p><h1>AI Code Quality Assistant</h1></div>
+    <span class="version">Mode 2 Flowise</span>
+  </header>
+  <main>
+    <section class="intro">
+      <div><p class="eyebrow">ANALYSER · COMPRENDRE · AMÉLIORER</p><h2>Comprendre son code, avec l’aide de l’IA.</h2><p class="lead">Une analyse statique reproductible, complétée par une revue pédagogique générée par un modèle de langage.</p></div>
+      <div class="notice"><strong>Mode expérimental</strong><p>La revue IA utilise Ollama sur votre environnement local. Le code n’est pas envoyé à une API cloud par cette application.</p></div>
+    </section>
+    <section class="workspace">
+      <div class="panel editor-panel">
+        <div class="panel-heading"><div><span class="step">01</span><h3>Votre code JavaScript</h3></div><label class="upload">Importer un fichier .js<input id="fileInput" type="file" accept=".js,text/javascript,application/javascript"></label></div>
+        <textarea id="codeInput" spellcheck="false" aria-label="Code JavaScript" placeholder="Collez ici une fonction JavaScript…">function isEligible(age, hasTicket) {
+  if (age >= 18 && hasTicket) {
+    return true;
+  }
+  return false;
+}</textarea>
+        <div class="editor-footer">
+          <span id="charCount">0 caractère</span>
+          <button id="generateTestsBtn" class="primary">
+            Générer les tests Jest <span aria-hidden="true">→</span>
+          </button>
+        </div>
+        <p class="hint">Le code est analysé statiquement : il n’est pas exécuté par le serveur.</p>
+      </div>
+      
+    </section>
+	    <section id="testResultsPanel" class="panel test-results-panel hidden">
+      <div class="panel-heading">
+        <div><span class="step">03</span><h3>Génération des tests unitaires</h3></div>
+        <span id="testStatus" class="status">En attente</span>
+      </div>
+
+      <div id="testErrorBox" class="error-box hidden" role="alert"></div>
+
+      <section class="result-section">
+        <h4>Plan de tests</h4>
+        <pre id="testPlanOutput"></pre>
+      </section>
+
+      <section class="result-section">
+        <h4>Code Jest généré</h4>
+        <pre id="jestCodeOutput"></pre>
+      </section>
+	  
+    </section>
+    <footer><span>AI Code Quality Assistant · Prototype pédagogique</span><span>Analyse statique ≠ preuve d’absence de défauts</span></footer>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
